@@ -1,0 +1,15 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'lib/lib.css' %}"/>
+
+<h1>Login</h1>
+<a href="{% url 'books' %}">Go back</a>
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Login">
+</form>
+
+{% endblock content %}

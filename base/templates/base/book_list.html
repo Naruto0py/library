@@ -1,0 +1,52 @@
+
+{% extends 'base/main.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'lib/lib.css' %}"/>
+
+
+
+<div class="header-bar">
+    <div>
+        <h1>Books Library Management</h1>
+    </div>
+
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">login</a>
+{% endif %}
+
+</div>
+
+
+<hr>
+
+
+<table>
+    <tr>
+        <th>Books</th>
+        <tr>
+        <a href="{% url 'book-create' %}">Add New Book</a>
+        <tr>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{book.title}}</td>
+        <tr>
+        <td><a href="{% url 'book' book.id %}">View</a></td>
+        <td><a href="{% url 'book-update' book.id %}">Update</a></td>
+        <td><a href="{% url 'book-delete' book.id %}">Delete</a></td>
+    </tr>
+    {% empty %}
+    <h3>No Books in the Library.</h3>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+
+
